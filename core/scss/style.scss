@@ -16,36 +16,63 @@ License URI: license.txt
 
 $background-color: #008000;
 $background-text-color: #ffffff;
-
 $background-border-color: $background-color - #002000;
+
 $menu-background-start: $background-color;
 $menu-background-end: $background-border-color;
 $menu-background-hover-start: $menu-background-start - #002000;
 $menu-background-hover-end: $menu-background-end - #002000;
 $menu-background-current-item: $background-color - #004000;
 
-a {
-  color: $background-color;
-}
+$orange-button-start: #ffa64d; 
+$orange-button-end: #ff8000;
 
-#featured {
-  h1, h2, p {
-    color: $background-text-color;
-  }
-
-  background: $background-color;
-  border: 1px solid $background-border-color;
-}
-
-@mixin menu-gradient($start, $end) {
+@mixin base-gradient($start, $end, $background:$start) {
   @include filter-gradient($start, $end);
-  background: $start;
+  background: $background;
   color: $background-text-color;
   @include background(linear-gradient(top, $start, $end));
 }
 
+a {
+  color: $background-color;
+}
+
+.button {
+  border: 1px solid $orange-button-end - #222;
+  text-shadow: 0 -1px 0 $orange-button-end - #222;
+}
+
+a.orange {
+  @include base-gradient($orange-button-start, $orange-button-end, $orange-button-end);
+  @extend .button
+}
+
+a.orange:hover {
+  @include base-gradient($orange-button-start + #222, $orange-button-end, $orange-button-end);
+  @extend .button
+}
+
+
+#featured {
+  background: $background-color;
+  border: 1px solid $background-border-color;
+
+  h1, h2, p {
+    color: $background-text-color;
+  }
+
+  h2 {
+    margin-top: 1.5em;
+  }
+
+  .grid {
+    margin-bottom: 0;
+  }
+}
+
 .menu {
-  @include menu-gradient($menu-background-start, $menu-background-end);
+  @include base-gradient($menu-background-start, $menu-background-end);
 
   a {
     border-left: 1px solid $background-color;
@@ -53,7 +80,7 @@ a {
   }
 
   a:hover {
-    @include menu-gradient($menu-background-hover-start, $menu-background-hover-end);
+    @include base-gradient($menu-background-hover-start, $menu-background-hover-end);
   }
 
   .current_page_item a,
@@ -63,7 +90,7 @@ a {
 }
 
 ul.menu > li:hover {
-  @include menu-gradient($menu-background-hover-start, $menu-background-hover-end);
+  @include base-gradient($menu-background-hover-start, $menu-background-hover-end);
 }
 
 /* =Responsive (Mobile) Design
@@ -71,6 +98,6 @@ ul.menu > li:hover {
 
 @media screen and (max-width: 650px) {
   .js .main-nav {
-    @include menu-gradient($menu-background-start, $menu-background-end);
+    @include base-gradient($menu-background-start, $menu-background-end);
   }
 }
