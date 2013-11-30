@@ -1,0 +1,76 @@
+/*! 
+Theme Name: Agromatic
+Theme URI: http://agromatic.com.ve/
+Description: Wordpress theme for Agromatic (a CyberChimps Responsive Free child theme)
+Template: responsive
+Version: 1.0.0
+Author: Eleazar Meza
+Author URI: http://twitter.com/elshaka
+License: GNU General Public License
+License URI: license.txt
+
+*/
+
+@import "compass/css3/images";
+@import "compass/utilities/general/hacks";
+
+$background-color: #008000;
+$background-text-color: #ffffff;
+
+$background-border-color: $background-color - #002000;
+$menu-background-start: $background-color;
+$menu-background-end: $background-border-color;
+$menu-background-hover-start: $menu-background-start - #002000;
+$menu-background-hover-end: $menu-background-end - #002000;
+$menu-background-current-item: $background-color - #004000;
+
+a {
+	color: $background-color;
+}
+
+#featured {
+	h1, h2, p {
+		color: $background-text-color;
+	}
+
+	background: $background-color;
+	border: 1px solid $background-border-color;
+}
+
+@mixin menu-gradient($start, $end) {
+	@include filter-gradient($start, $end);
+	background: $start;
+	color: $background-text-color;
+	@include background(linear-gradient(top, $start, $end));
+}
+
+.menu {
+	@include menu-gradient($menu-background-start, $menu-background-end);
+
+	a {
+		border-left: 1px solid $background-color;
+		color: $background-text-color;
+	}
+
+	a:hover {
+		@include menu-gradient($menu-background-hover-start, $menu-background-hover-end);
+	}
+
+	.current_page_item a,
+	.current-menu-item a {
+		background-color: $menu-background-current-item;
+	}
+}
+
+ul.menu > li:hover {
+	@include menu-gradient($menu-background-hover-start, $menu-background-hover-end);
+}
+
+/* =Responsive (Mobile) Design
+-------------------------------------------------------------- */
+
+@media screen and (max-width: 650px) {
+	.js .main-nav {
+		@include menu-gradient($menu-background-start, $menu-background-end);
+	}
+}
