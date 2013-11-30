@@ -24,8 +24,8 @@ $menu-background-hover-start: $menu-background-start - #002000;
 $menu-background-hover-end: $menu-background-end - #002000;
 $menu-background-current-item: $background-color - #004000;
 
-$orange-button-start: #ffa64d; 
 $orange-button-end: #ff8000;
+$orange-button-start: $orange-button-end + #222;
 
 @mixin base-gradient($start, $end, $background:$start) {
   @include filter-gradient($start, $end);
