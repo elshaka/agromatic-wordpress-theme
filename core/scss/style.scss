@@ -14,17 +14,18 @@ License URI: license.txt
 @import "compass/css3/images";
 @import "compass/utilities/general/hacks";
 
+$responsive-menu-height: 45px;
+$text-color: #444444;
 $background-color: #008000;
 $background-text-color: #ffffff;
-$background-border-color: $background-color - #002000;
+$orange-button-end: #ff8000;
 
+$background-border-color: $background-color - #002000;
 $menu-background-start: $background-color;
 $menu-background-end: $background-border-color;
 $menu-background-hover-start: $menu-background-start - #002000;
 $menu-background-hover-end: $menu-background-end - #002000;
 $menu-background-current-item: $background-color - #004000;
-
-$orange-button-end: #ff8000;
 $orange-button-start: $orange-button-end + #222;
 
 @mixin base-gradient($start, $end, $background:$start) {
@@ -52,7 +53,6 @@ a.orange:hover {
   @include base-gradient($orange-button-start + #222, $orange-button-end, $orange-button-end);
   @extend .button
 }
-
 
 #featured {
   background: $background-color;
@@ -99,5 +99,53 @@ ul.menu > li:hover {
 @media screen and (max-width: 650px) {
   .js .main-nav {
     @include base-gradient($menu-background-start, $menu-background-end);
+    height: $responsive-menu-height;
+
+    .menu {
+      top: $responsive-menu-height;
+
+      li {
+        background-color: #fff;
+      }
+
+      li.current_page_item {
+        background-color: $background-color + #ccc;
+      }
+
+      li a {
+        color: $text-color;
+        border: 1px solid $menu-background-start + #666;
+        border-top: none
+      }
+
+      li a:hover,
+      .js .main-nav .menu li li a:hover {
+        background-color: $background-color + #ccc !important;
+      }
+    }
+
+    #responsive_current_menu_item {
+      line-height: $responsive-menu-height;
+      padding: 0 0 0 ($responsive-menu-height - 30px); // No termino de entender
+      color: $background-text-color;
+    }
+
+    a#responsive_menu_button {
+      top: 0;
+      left: 100%;
+      height: $responsive-menu-height;
+      width: 38px;
+      margin-left: $responsive-menu-height * -1;
+      background: url('core/images/select-icons.png') 0 12px no-repeat;
+    }
+
+    a#responsive_menu_button.responsive-toggle-open {
+      background: url('core/images/select-icons.png') 0 -39px no-repeat;
+    }
+  }
+
+  .js .menu .current_page_item a,
+  .js .menu .current-menu-item a {
+    background-color: $background-color + #ccc;
   }
 }
