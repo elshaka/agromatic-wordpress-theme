@@ -35,6 +35,9 @@ $orange-button-start: $orange-button-end + #222;
   @include background(linear-gradient(top, $start, $end));
 }
 
+body {
+  font-family: Aller, Helvetica, Arial, sans-serif;
+}
 a {
   color: $background-color;
 }
@@ -62,13 +65,20 @@ a.orange:hover {
     color: $background-text-color;
   }
 
-  h2 {
-    margin-top: 1.5em;
-  }
-
   .grid {
     margin-bottom: 0;
   }
+}
+
+.featured-title {
+  display: none;
+}
+
+.featured-subtitle {
+  font-style: italic;
+  margin: 0;
+  padding-top: 40px;
+  text-align: center;
 }
 
 .menu {
